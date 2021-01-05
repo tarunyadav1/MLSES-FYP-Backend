@@ -1,0 +1,10 @@
+{
+    "name": "MLSES-FYP-Backend",
+    "version": "0.1",
+    "description": "AgriSense Backend",
+    "main": "index.js",
+    "repository": "https://github.com/tarunyadav1/MLSES-FYP-Backend.git",
+    "author": "Tarun yadav <tarunyadav9761@gmail.com>",
+    "license": "MIT",
+    "private": false
+}
