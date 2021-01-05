@@ -1,16 +1,56 @@
 {
-    "name": "MLSES-FYP-Backend",
+    "name": "AgriSense-Backend",
     "version": "0.1",
-    "description": "AgriSense Backend",
+    "description": "AgriSense Backend for building RESTful APIs",
     "main": "index.js",
     "repository": "https://github.com/tarunyadav1/MLSES-FYP-Backend.git",
     "author": "Tarun yadav <tarunyadav9761@gmail.com>",
     "license": "MIT",
+    "engines": {
+        "node": ">=8",
+        "yarn": "*"
+    },
     "private": false,
     "scripts": {
-        "start": "node index.js"
+        "start": "node index.js",
+        "build": "webpack --mode production"
     },
     "dependencies": {
-        "express": "^4.17.1"
-    }
+        "body-parser": "^1.19.0",
+        "compression": "^1.7.4",
+        "cors": "^2.8.5",
+        "dotenv-safe": "^8.2.0",
+        "express": "^4.17.1",
+        "express-validation": "^3.0.6",
+        "helmet": "^4.3.1",
+        "joi": "^17.3.0",
+        "jwt-simple": "^0.5.6",
+        "moment": "^2.29.1",
+        "mongoose": "^5.11.10",
+        "morgan": "^1.10.0",
+        "nodemailer": "^6.4.17",
+        "pm2": "^4.5.1",
+        "uuid": "^8.3.2"
+    },
+    "devDependencies": {
+        "apidoc": "^0.26.0",
+        "eslint": "^7.17.0",
+        "eslint-config-airbnb-base": "^14.2.1",
+        "nodemon": "^2.0.6"
+    },
+    "keywords": [
+        "express",
+        "node",
+        "node.js",
+        "mongodb",
+        "mongoose",
+        "passport",
+        "es6",
+        "es7",
+        "es8",
+        "es2017",
+        "eslint",
+        "REST",
+        "API"
+    ]
 }
