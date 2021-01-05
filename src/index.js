@@ -1,16 +1,15 @@
-const express = require('express');
-const app = express();
-const port = process.env.PORT || 3000;
-const mockResponse = {
-    foo: 'bar',
-    bar: 'foo'
-};
-app.get('/api', (req, res) => {
-    res.send(mockResponse);
-});
-app.get('/', (req, res) => {
-    res.status(200).send('Hello World!');
-});
-app.listen(port, function () {
-    console.log('App listening on port: ' + port);
-});
+const { port, env } = require('./config/vars');
+const app = require('./config/express');
+const mongoose = require('./config/mongoose');
+
+// open mongoose connection
+mongoose.connect();
+
+// listen to requests
+app.listen(port, () => console.log(`Server start at ${port} port`));
+
+/**
+* Exports express
+* @public
+*/
+module.exports = app;
