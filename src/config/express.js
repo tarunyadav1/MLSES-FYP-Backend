@@ -1,17 +1,16 @@
-const express = require('express');
-const morgan = require('morgan');
-const bodyParser = require('body-parser');
-const compress = require('compression');
-const cors = require('cors');
-const helmet = require('helmet');
+const express = require("express");
+const morgan = require("morgan");
+const bodyParser = require("body-parser");
+const compress = require("compression");
+const cors = require("cors");
+const helmet = require("helmet");
 
-const { logs } = require('./vars');
-
+const { logs } = require("./vars");
 
 /**
-* Express instance
-* @public
-*/
+ * Express instance
+ * @public
+ */
 const app = express();
 
 // request logging. dev: console | production: file
@@ -30,11 +29,17 @@ app.use(helmet());
 // enable CORS - Cross Origin Resource Sharing
 app.use(cors());
 
-
 // example
-app.get('/', function (req, res) {
-    res.send('Hello World')
-})
+app.get("/", function (req, res) {
+  res.send("Hello World");
+});
 
+app.get("/api", function (req, res) {
+  console.log(req);
+
+  res.json({
+    hello: "world",
+  });
+});
 
 module.exports = app;
