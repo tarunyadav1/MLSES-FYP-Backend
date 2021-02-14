@@ -6,6 +6,7 @@ const cors = require("cors");
 const helmet = require("helmet");
 
 const { logs } = require("./vars");
+const userRoute = require('../routes/user.routes')
 
 /**
  * Express instance
@@ -28,18 +29,6 @@ app.use(helmet());
 
 // enable CORS - Cross Origin Resource Sharing
 app.use(cors());
-
-// example
-app.get("/", function (req, res) {
-  res.send("Hello World");
-});
-
-app.get("/api", function (req, res) {
-  console.log(req);
-
-  res.json({
-    hello: "world",
-  });
-});
+app.use('/api',userRoute.routes)
 
 module.exports = app;

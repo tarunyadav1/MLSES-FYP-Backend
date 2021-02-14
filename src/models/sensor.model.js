@@ -16,4 +16,4 @@ const SensorSchema = new mongoose.Schema({
     },
 });
 
-export default mongoose.model("Sesorn", SensorSchema);
+mongoose.model("Sensor", SensorSchema);
