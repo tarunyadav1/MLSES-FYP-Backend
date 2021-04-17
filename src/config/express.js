@@ -7,6 +7,8 @@ const helmet = require("helmet");
 
 const { logs } = require("./vars");
 const userRoute = require('../routes/user.routes')
+const sensorRoute = require('../routes/sensor.routes');
+const timedataRoutes = require("../routes/timedata.routes");
 
 /**
  * Express instance
@@ -30,5 +32,7 @@ app.use(helmet());
 // enable CORS - Cross Origin Resource Sharing
 app.use(cors());
 app.use('/api',userRoute.routes)
+app.use('/api',sensorRoute.routes)
+app.use('/api',timedataRoutes.routes)
 
 module.exports = app;

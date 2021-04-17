@@ -1,19 +1,40 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
 
 const SensorSchema = new mongoose.Schema({
 
-    value: {
+    sid: {
         type: Number,
-        default: 0,
+        default: 000000,
+        unique: "Already used",
+        required: "Please provide Sid on the board logic"
     },
-
+    name: {
+        type: String,
+        default: "sensor xx",
+    },
     created: {
         type: Date,
         default: Date.now,
     },
-    updated: {
+    updated_time: {
         type: Date,
+        default : Date.now,
     },
+    Offstatus: {
+        type: Boolean,
+        default: false,
+
+    },
+    relativeLocation : {
+        type: String,
+    }
+
 });
 
-mongoose.model("Sensor", SensorSchema);
+SensorSchema.method("toJSON", function() {
+    const { __v, _id, ...object} = this.toObject();
+    object.id = _id;
+    return object;
+})
+
+module.exports = mongoose.model("Sensor", SensorSchema);
