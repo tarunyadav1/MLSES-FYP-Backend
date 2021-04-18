@@ -1,12 +1,11 @@
 const express = require( "express");
-const {getAllSensorsValues,addValues,ValuesbySid} =require( '../controllers/timedata.controller')
+const {addValues,valuesbySid,valuesbyFid} =require( '../controllers/timedata.controller')
 
 const router = express.Router();
 
-router.get('/Values',getAllSensorsValues)
-router.post('/post-value',addValues)
-router.get('/:fid/:sid/values',ValuesbySid)
-
+router.post('/fields/pushdata',addValues)
+router.get('/fields/:fid/:sid/values',valuesbySid)
+router.get('/fields/:fid',valuesbyFid)
 module.exports ={
     routes:router
 }

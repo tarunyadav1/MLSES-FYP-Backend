@@ -13,41 +13,54 @@ const addValues = async (req, res) =>{
     });
   }
 }
-const ValuesbySid = async (req, res) => {
+const valuesbyFid = async (req, res) => {
 
-    const sensorid = req.params.sid
     const fieldid = req.params.fid
-    timedataValues.find({"sid" : sensorid , "fid" : fieldid})
+    timedataValues.find({"fid" : fieldid})
     .then(data => {
         if(!data)
-            res.status(404).send({message: " No sensor found with id" + sensorid})
+            res.status(404).send({message: " No field found with id" + fieldid})
         else
             res.send(data);
     })
     .catch(err => {
         res
         .status(500)
-        .send({message: err ||" Error occured while retrieving Sensor information"})
+        .send({message: err ||" Error occured while retrieving Field information"})
     })
 }
-const getAllSensorsValues = async (req, res) => {
-    timedataValues.find()
+const valuesbySid = async (req,res) => {
+    const fieldid = req.params.fid
+    const sensorid = req.params.sid
+    timedataValues.find( { "fid" : fieldid , "sid" : sensorid}).limit(2)
     .then(data => {
         if(!data)
-            res.status(404).send({message: " No sensor found with id" + sensorid})
+            res.status(404).send({message : "No sensor found with requested id" + sensorid})
         else
-            res.send(data);
+            res.send(data)
     })
     .catch(err => {
-        res
-        .status(500)
-        .send({message: err ||" Error occured while retrieving Sensor information"})
+        res.status(500).send({message: err || "Error occured while retrieving Sensor information. Please try again later!"})
     })
+}
+// const getAllSensorsValues = async (req, res) => {
+//     timedataValues.find()
+//     .then(data => {
+//         if(!data)
+//             res.status(404).send({message: " No sensor found with id" + sensorid})
+//         else
+//             res.send(data);
+//     })
+//     .catch(err => {
+//         res
+//         .status(500)
+//         .send({message: err ||" Error occured while retrieving Sensor information"})
+//     })
     
-}
+// }
 
 module.exports = {
-    getAllSensorsValues,
-    ValuesbySid,
+    valuesbySid,
+    valuesbyFid,
     addValues,
 }

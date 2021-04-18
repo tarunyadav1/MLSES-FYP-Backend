@@ -5,7 +5,7 @@ const addUser = async (req,res) => {
     try{
     await user.save();
     return res.status(200).json({
-      message: "Successfully signed up!",
+      message: "User added",
     });
   } catch (err) {
     return res.status(400).json({
@@ -15,10 +15,23 @@ const addUser = async (req,res) => {
 
 }
 
-const getuser = async (req,res) => {
+const getusers = async (req,res) => {
         User.find()
-        .then(users =>{
-            res.send(users)
+         .then(users =>{
+           res.send(users)
+        })
+        .catch(err =>{
+            res.status(500).send({
+                message: err.message || " ek error aya h bhai "
+            })
+        })
+
+}
+const getuserbyID = async (req,res) => {
+        const userID = req.params.uid
+        User.find({"uid" : userID})
+        .then(user =>{
+            res.send(user)
         })
         .catch(err =>{
             res.status(500).send({
@@ -29,6 +42,7 @@ const getuser = async (req,res) => {
 
 }
 module.exports = {
-    getuser,
     addUser,
+    getuserbyID,
+    getusers,
 }

@@ -5,7 +5,7 @@ const addSensor = async (req, res) =>{
     try{
     await sensor.save();
     return res.status(200).json({
-      message: "value added to db",
+      message: "Sensor value added to db",
     });
   } catch (err) {
     return res.status(400).json({
@@ -14,7 +14,7 @@ const addSensor = async (req, res) =>{
   }
 }
 const SensorbyId = async (req,res) => {
-    const sensorid = req.params.id;
+    const sensorid = req.params.sid;
     Sensors.find({"sid" : sensorid})
     .then(data => {
         if(!data)
@@ -29,6 +29,7 @@ const SensorbyId = async (req,res) => {
     })
 }
 const getAllSensors = async (req,res) => {
+    
     Sensors.find()
     .then(
         sensors =>{
@@ -40,8 +41,23 @@ const getAllSensors = async (req,res) => {
         .send({message: err || "Try agian later"})
     })
 }
+const getAllSensorsbyFid = async (req,res) => {
+    const fieldID = req.params.fid 
+    Sensors.find({"fid" : fieldID})
+    .then(
+        sensors =>{
+            res.send(sensors)
+        }
+    )
+    .catch(err => {
+        res.status(500)
+        .send({message: err || "Try agian later"})
+    })
+}
+
 module.exports ={
     addSensor,
     SensorbyId,
-    getAllSensors
+    getAllSensors,
+    getAllSensorsbyFid
 }

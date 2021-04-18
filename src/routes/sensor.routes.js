@@ -1,11 +1,12 @@
 const express = require( "express");
-const {getAllSensors,SensorbyId,addSensor} =require( '../controllers/sensor.controller')
+const {getAllSensors,SensorbyId,addSensor,getAllSensorsbyFid} =require( '../controllers/sensor.controller')
 
 const router = express.Router();
 
-router.get('/Sensors',getAllSensors)
-router.post('/Sensor',addSensor)
-router.get('/Sensors/:id',SensorbyId)
+router.get('/sensors',getAllSensors)
+router.post('/sensor/save',addSensor)
+router.get('/sensors/:sid',SensorbyId)
+router.get('/:fid/sensors',getAllSensorsbyFid)
 
 module.exports ={
     routes:router
