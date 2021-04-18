@@ -1,15 +1,15 @@
 const mongoose = require("mongoose");
 
-const SensorSchema = new mongoose.Schema({
+const FieldSchema = new mongoose.Schema({
 
-    sid: {
+    fid: {
         type: Number,
         unique: "Already used",
-        required: "Please provide Sid on the board logic"
+        required: "Please provide fid on the board logic"
     },
     name: {
         type: String,
-        default: "sensor xx",
+        default: "Field xx",
     },
     created: {
         type: Date,
@@ -19,25 +19,20 @@ const SensorSchema = new mongoose.Schema({
         type: Date,
         default : Date.now,
     },
-    Offstatus: {
-        type: Boolean,
-        default: false,
-
-    },
-    relativeLocation : {
+    Location : {
         type: String,
     },
-    fid: {
+    uid: {
         type: Number,
-        required: "Please assign FieldId to the Sensor",
+        required: "Please provide userid on the board"
     }
 
 });
 
-SensorSchema.method("toJSON", function() {
+FieldSchema.method("toJSON", function() {
     const { __v, _id, ...object} = this.toObject();
     object.id = _id;
     return object;
 })
 
-module.exports = mongoose.model("Sensor", SensorSchema);
+module.exports = mongoose.model("Field", FieldSchema);

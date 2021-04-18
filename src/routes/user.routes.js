@@ -1,10 +1,12 @@
 const express = require('express')
-const {getuser,addUser} = require('../controllers/user.controller')
+const {getusers,addUser,getuserbyID} = require('../controllers/user.controller')
 
 const router = express.Router()
 
-router.get('/Users',getuser)
-router.post('/User',addUser)
+
+router.post('/user/save',addUser)
+router.get('/user/:uid',getuserbyID)
+router.get('/users',getusers)
 
 module.exports = {
     routes: router
