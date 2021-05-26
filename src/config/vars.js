@@ -13,7 +13,8 @@ module.exports = {
     jwtSecret: process.env.JWT_SECRET,
     jwtExpirationInterval: process.env.JWT_EXPIRATION_MINUTES,
     mongo: {
-        uri: process.env.NODE_ENV === 'dev' ? process.env.MONGO_URI_DEV : process.env.MONGO_URI,
+        uri: process.env.NODE_ENV === 'developement' ? process.env.MONGO_URI_TESTS : process.env.MONGO_URI,
+        authuri: process.env.NODE_ENV =='development' ? process.env.AUTH_DB_URI_TESTS : process.env.AUTH_DB_URI,
     },
     logs: process.env.NODE_ENV === 'production' ? 'combined' : 'dev',
 };

@@ -1,10 +1,10 @@
 {
-    "name": "AgriSense-Backend",
+    "name": "bharatsense",
     "version": "0.1",
-    "description": "AgriSense Backend for building RESTful APIs",
+    "description": "BharatSense Backend for building RESTful APIs",
     "main": "index.js",
     "repository": "https://github.com/tarunyadav1/MLSES-FYP-Backend.git",
-    "author": "Tarun yadav <tarunyadav9761@gmail.com>",
+    "author": "Tarun yadav <tarunyadav9761@gmail.com> , Kartik Sachdeva <kartiksachdeva3@gmail.com>",
     "license": "MIT",
     "engines": {
         "node": ">=8",
@@ -17,12 +17,14 @@
         "docs": "apidoc -i src -o docs"
     },
     "dependencies": {
-        "body-parser": "^1.19.0",
+        "bcrypt": "^5.0.1",
+        "bcryptjs": "^2.4.3",
         "compression": "^1.7.4",
         "cors": "^2.8.5",
         "cross-env": "^7.0.3",
         "dotenv-safe": "^8.2.0",
         "express": "^4.17.1",
+        "express-session": "^1.17.1",
         "express-validation": "^3.0.6",
         "helmet": "^4.3.1",
         "joi": "^17.3.0",
@@ -33,6 +35,7 @@
         "morgan": "^1.10.0",
         "nodemailer": "^6.4.17",
         "passport": "^0.4.1",
+        "passport-jwt": "^4.0.0",
         "passport-local": "^1.0.0",
         "pm2": "^4.5.1",
         "uuid": "^8.3.2",
