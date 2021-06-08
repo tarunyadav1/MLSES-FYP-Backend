@@ -42,7 +42,7 @@ app.use('/',authRoutes.routes);
 
 app.use('/user',passport.authenticate('jwt',{session: false}), secretRoutes);
 
-app.use('/api',userRoutes.routes)
+app.use('/api',passport.authenticate('jwt',{session : false} ) ,userRoutes.routes)
 app.use('/api',timedataRoutes.routes)
 app.use('/api/user/fields', passport.authenticate('jwt',{session:false}),sensorRoute.routes)
 app.use('/api/user/',fieldRoutes.routes)

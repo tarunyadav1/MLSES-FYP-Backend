@@ -35,18 +35,18 @@ router.post(
             { session: false },
             async (error) => {
               if (error) return next(error);
-
+              const time = "3600"
               const body = { _id: user._id, email: user.email };
-              const token = jwt.sign({ user: body }, 'TOP_SECRET');
-
-              return res.json({ token });
+              const token = jwt.sign({ user: body }, 'hkkkmnt');
+            
+              return res.json({body, token ,expireIn: time});
             }
           );
         } catch (error) {
           return next(error);
         }
       }
-    )(req, res, next);
+    ,{successRedirect: '/dashboard', failureRedirect : '/login'})(req, res, next);
   }
 );
 

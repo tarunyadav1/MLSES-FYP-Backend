@@ -6,12 +6,6 @@ const { func, string } = require("joi");
 const { Schema } = mongoose;
 
 const AuthSchema = new Schema({
-  uid: {
-    type: Number,
-  },
-  name: {
-    type: string,
-  },
   email: {
     type: String,
     trim: true,
@@ -29,6 +23,19 @@ const AuthSchema = new Schema({
     type: Date,
     default: Date.now,
   },
+  name: {
+    type: String,
+    required : "Name is required",
+    
+  },
+  contactnumber: {
+    type: Number,
+    unique: "Mobile number already exists",
+  },
+  isverified: {
+    type: Boolean,
+    default : false,
+  }
 });
 
 AuthSchema.pre('save',
@@ -38,6 +45,7 @@ async function(next)
   const user = this;
   const hash = await bcrypt.hash(this.password,10);
   this.password=hash;
+
   next();
 })
 

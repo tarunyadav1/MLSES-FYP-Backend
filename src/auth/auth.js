@@ -7,13 +7,12 @@ const ExtractJWT = require('passport-jwt').ExtractJwt
 
 passport.use('signup' , new localStrategy(
   {
-    name:'Name',
     usernameField : 'email',
     passwordField : 'password'
   },
   async (email,password , done) => {
     try{
-      const user = await User.create( {name,email,password})
+      const user = await User.create( {email,password})
       return done(null,user);
   } catch(error) {
     done(error);
@@ -53,8 +52,8 @@ passport.use(
 passport.use(
   new JWTstrategy (
     {
-      secretOrKey : 'TOP_SECRET',
-      jwtFromRequest : ExtractJWT.fromUrlQueryParameter('secret_token')
+      secretOrKey : 'hkkkmnt',
+      jwtFromRequest : ExtractJWT.fromAuthHeaderAsBearerToken()
     },
     async ( token , done) => {
       try {
