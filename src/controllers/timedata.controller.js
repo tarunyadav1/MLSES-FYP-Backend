@@ -3,7 +3,7 @@ const timedataValues = require('../models/timedata.model')
 const addValues = async (req, res) =>{
     const sensor = new timedataValues(req.body)
     try{
-    // await sensor.save();
+    await sensor.save();
     return res.status(200).json({
       message: "value added to db",
       values : req.body,

@@ -36,10 +36,11 @@ router.post(
             async (error) => {
               if (error) return next(error);
               const time = "3600"
-              const body = { _id: user._id, email: user.email };
+              const userdata = { _id: user._id, email: user.email ,name: user.name, contactnumber : user.contactnumber};
+              const body = { _id: user._id, email: user.email, contactnumber : user.contactnumber};
               const token = jwt.sign({ user: body }, 'hkkkmnt');
             
-              return res.json({body, token ,expireIn: time});
+              return res.json({userdata, token ,expireIn: time});
             }
           );
         } catch (error) {

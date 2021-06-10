@@ -4,21 +4,53 @@ const localStrategy = require('passport-local').Strategy
 const JWTstrategy = require('passport-jwt').Strategy
 const ExtractJWT = require('passport-jwt').ExtractJwt
 
+passport.serializeUser(function(user, done) {
+done(null, user.id);
+});
 
-passport.use('signup' , new localStrategy(
-  {
-    usernameField : 'email',
-    passwordField : 'password'
-  },
-  async (email,password , done) => {
-    try{
-      const user = await User.create( {email,password})
-      return done(null,user);
-  } catch(error) {
-    done(error);
-  }
-}
-));
+passport.deserializeUser(function(id, done) {
+User.findById(id, function(err, user) {
+done(err, user);
+});
+});
+
+// ======================SIGNUP ===========================
+passport.use('signup', new localStrategy({
+
+usernameField : 'email',
+passwordField : 'password',
+passReqToCallback : true 
+// allows us to pass back the entire request to the callback
+},
+function(req, email, password, done) {
+
+    var newUser = new User();
+      
+
+ 
+
+      newUser.email    = email;
+      newUser.password = password;
+      newUser.name = req.body.name;
+      newUser.contactnumber = req.body.contactnumber
+
+        try{
+          newUser.save(function(err){
+            if(err)
+            done(err)
+            return done(null,newUser)
+          })
+        }
+        catch(err) {
+          return done(null, false , err)
+        }
+
+
+}));
+
+
+
+
 
 passport.use(
   'login',
