@@ -9,9 +9,16 @@ const router = express.Router()
 router.post('/signup',
 passport.authenticate('signup', { session : false}),
 async (req,res,next) => {
+              const time = "3600"
+              const userdata = { _id: req.user._id, email: req.user.email ,name: req.user.name, contactnumber : req.user.contactnumber};
+              const body = { _id: req.user._id, email: req.user.email, contactnumber : req.user.contactnumber};
+              const token = jwt.sign({ user: body }, 'hkkkmnt');
+          
     res.json({
         message: 'Signed Up successfully',
-        user : req.user
+        ...userdata,
+        token,
+        expireIn: time
     })
 }
 )
@@ -27,7 +34,7 @@ router.post(
           if (err || !user) {
             
 
-            return res.status(401).send({err})
+            return res.status(401).send({err,info})
           }
 
           req.login(
@@ -40,7 +47,7 @@ router.post(
               const body = { _id: user._id, email: user.email, contactnumber : user.contactnumber};
               const token = jwt.sign({ user: body }, 'hkkkmnt');
             
-              return res.json({userdata, token ,expireIn: time});
+              return res.json({...userdata, token ,expireIn: time});
             }
           );
         } catch (error) {
