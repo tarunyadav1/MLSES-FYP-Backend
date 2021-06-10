@@ -33,7 +33,21 @@ const valuesbyFid = async (req, res) => {
 const valuesbySid = async (req,res) => {
     const fieldid = req.params.fid
     const sensorid = req.params.sid
-    timedataValues.find( { "fid" : fieldid , "sid" : sensorid}).limit(2)
+    timedataValues.find( {"sid" : sensorid})
+    .then(data => {
+        if(!data)
+            res.status(404).send({message : "No sensor found with requested id" + sensorid})
+        else
+            res.send(data)
+    })
+    .catch(err => {
+        res.status(500).send({message: err || "Error occured while retrieving Sensor information. Please try again later!"})
+    })
+}
+const valuesbySidShowcase = async (req,res) => {
+    const fieldid = req.params.fid
+    const sensorid = req.params.sid
+    timedataValues.find( {"sid" : sensorid}).limit(1)
     .then(data => {
         if(!data)
             res.status(404).send({message : "No sensor found with requested id" + sensorid})
@@ -64,4 +78,5 @@ module.exports = {
     valuesbySid,
     valuesbyFid,
     addValues,
+    valuesbySidShowcase
 }
